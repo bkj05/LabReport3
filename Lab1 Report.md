@@ -111,3 +111,6 @@ cat transcript.txt
 ```
 
 **Absolute Path to Working Directory**: `/Users/benjaminkettorjr`
+
+![Screenshot](Screenshot1.png)
+![Screenshot](Screenshot2.png)
