@@ -62,7 +62,7 @@ Explanation: Running `ls` with no arguments lists the contents of the current di
 ```bash
 ls Desktop
 ```
-![ls desktop](ls8text.png)
+![ls desktop](ls18desktop.png)
 **Absolute Path to Working Directory**: `/Users/benjaminkettorjr`
 
 Explanation: Running `ls` with a directory name as an argument lists the contents of the specified directory (`/Users/benjaminkettorjr/Desktop` in this case). The output is not an error.
