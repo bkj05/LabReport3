@@ -26,7 +26,7 @@ Explanation: Running `cd` with no arguments changes the directory to the home di
 ```bash
 cd Desktop
 ```
-![cd desktop](cd desktop.png)
+![cd](cd desktop.png)
 **Absolute Path to Working Directory**: `/home/user/Documents`
 
 Explanation: Running `cd` with a directory name as an argument changes the directory to the specified directory (`Documents` in this case). The output is not an error.
