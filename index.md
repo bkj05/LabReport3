@@ -27,7 +27,7 @@ Explanation: Running `cd` with no arguments changes the directory to the home di
 cd Desktop
 ```
 ![cd](cd1desktop.png)
-**Absolute Path to Working Directory**: `/home/user/Documents`
+**Absolute Path to Working Directory**: `/home/user/benjaminkettorj/Desktop`
 
 Explanation: Running `cd` with a directory name as an argument changes the directory to the specified directory (`Documents` in this case). The output is not an error.
 
