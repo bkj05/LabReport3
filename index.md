@@ -13,6 +13,7 @@ In this lab report, I will demonstrate the usage of basic filesystem commands: `
 ```bash
 cd
 ```
+![cd](cd.png)
 
 **Absolute Path to Working Directory**: `/Users/benjaminkettorjr`
 
@@ -25,7 +26,7 @@ Explanation: Running `cd` with no arguments changes the directory to the home di
 ```bash
 cd Desktop
 ```
-
+![cd desktop](cd desktop.png)
 **Absolute Path to Working Directory**: `/home/user/Documents`
 
 Explanation: Running `cd` with a directory name as an argument changes the directory to the specified directory (`Documents` in this case). The output is not an error.
@@ -37,7 +38,7 @@ Explanation: Running `cd` with a directory name as an argument changes the direc
 ```bash
 cd /Users/benjaminkettorjr/Desktop/transcript.txt
 ```
-
+![cd text(cd texrt.png)
 **Absolute Path to Working Directory**: `cd /Users/benjaminkettorjr/Desktop/transcript.txt`
 
 Explanation: Running `cd` with a file name as an argument is an error because `cd` is used for changing directories, not files. The output is an error indicating that the specified file does not exist.
