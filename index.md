@@ -110,7 +110,7 @@ Explanation: Running `cat` with a directory name as an argument is an error beca
 ```bash
 cat transcript.txt
 ```
-![cat text](ca12text.png)
+![cat text](cat12txt.png)
 **Absolute Path to Working Directory**: `/Users/benjaminkettorjr`
 
 Explanation: Running `cat` with a file name as an argument reads the contents of the specified file (`transcript.txt`). The output displays the contents of the file.
