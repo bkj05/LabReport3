@@ -77,7 +77,7 @@ public class ChatServer {
 ## Part 1: ScreenShots
 
 - **Screenshot 1:** Adding "Hello" from user "jpolitz"
-![Screenshot 1](screenshot1.png)
+![jplotz](jplotz.png.png)
 - **Methods called**: `handleRequest`, `sendResponseHeaders`, `getResponseBody`, `close`
 - **Relevant arguments**: URI with query parameters `s=Hello&user=jpolitz`
 - **Changes in class fields**: The `chatMessages` field is updated to "jpolitz: Hello\n"
