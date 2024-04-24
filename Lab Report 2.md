@@ -2,6 +2,7 @@
 
 ## Part 1: ChatServer
 
+```java
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
@@ -72,6 +73,3 @@ public class ChatServer {
         start(port);
     }
 }
-
-## Part 1: ScreenShots
-
