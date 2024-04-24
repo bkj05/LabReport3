@@ -74,4 +74,16 @@ public class ChatServer {
     }
 }
 
-*** Part1 ScreenShots
+## Part 1: ScreenShots
+
+- **Screenshot 1:** Adding "Hello" from user "jpolitz"
+![Screenshot 1](screenshot1.png)
+- **Methods called**: `handleRequest`, `sendResponseHeaders`, `getResponseBody`, `close`
+- **Relevant arguments**: URI with query parameters `s=Hello&user=jpolitz`
+- **Changes in class fields**: The `chatMessages` field is updated to "jpolitz: Hello\n"
+
+- **Screenshot 2:** Adding "How are you" from user "yash"
+![Screenshot 2](screenshot2.png)
+- **Methods called**: `handleRequest`, `sendResponseHeaders`, `getResponseBody`, `close`
+- **Relevant arguments**: URI with query parameters `s=How are you&user=yash`
+- **Changes in class fields**: The `chatMessages` field is updated to "jpolitz: Hello\nyash: How are you\n"
