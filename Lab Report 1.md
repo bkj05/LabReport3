@@ -13,6 +13,7 @@ In this lab report, I will demonstrate the usage of basic filesystem commands: `
 ```bash
 cd
 ```
+![cd](cd.png)
 
 **Absolute Path to Working Directory**: `/Users/benjaminkettorjr`
 
@@ -25,10 +26,10 @@ Explanation: Running `cd` with no arguments changes the directory to the home di
 ```bash
 cd Desktop
 ```
+![cd](cd1desktop.png)
+**Absolute Path to Working Directory**: `/home/user/benjaminkettorj/Desktop`
 
-**Absolute Path to Working Directory**: `/home/user/Documents`
-
-Explanation: Running `cd` with a directory name as an argument changes the directory to the specified directory (`Documents` in this case). The output is not an error.
+Explanation: Running `cd` with a directory name as an argument changes the directory to the specified directory (`Desktop` in this case). The output is not an error.
 
 ---
 
@@ -37,7 +38,7 @@ Explanation: Running `cd` with a directory name as an argument changes the direc
 ```bash
 cd /Users/benjaminkettorjr/Desktop/transcript.txt
 ```
-
+![cd text](cd2text.png)
 **Absolute Path to Working Directory**: `cd /Users/benjaminkettorjr/Desktop/transcript.txt`
 
 Explanation: Running `cd` with a file name as an argument is an error because `cd` is used for changing directories, not files. The output is an error indicating that the specified file does not exist.
@@ -49,7 +50,7 @@ Explanation: Running `cd` with a file name as an argument is an error because `c
 ```bash
 ls
 ```
-
+![ls](ls.png)
 **Absolute Path to Working Directory**: `/Users/benjaminkettorjr`
 
 Explanation: Running `ls` with no arguments lists the contents of the current directory (`/Users/benjaminkettorjr`). This output is not an error.
@@ -61,7 +62,7 @@ Explanation: Running `ls` with no arguments lists the contents of the current di
 ```bash
 ls Desktop
 ```
-
+![ls desktop](ls18desktop.png)
 **Absolute Path to Working Directory**: `/Users/benjaminkettorjr`
 
 Explanation: Running `ls` with a directory name as an argument lists the contents of the specified directory (`/Users/benjaminkettorjr/Desktop` in this case). The output is not an error.
@@ -73,7 +74,7 @@ Explanation: Running `ls` with a directory name as an argument lists the content
 ```bash
 ls /Users/benjaminkettorjr/Desktop/transcript.txt
 ```
-
+![ls text](ls0text.png)
 **Absolute Path to Working Directory**: `/Users/benjaminkettorjr`
 
 Explanation: Running `ls` with a file name as an argument lists information about the specified file (`transcript.txt`). The output is not an error.
@@ -85,7 +86,7 @@ Explanation: Running `ls` with a file name as an argument lists information abou
 ```bash
 cat
 ```
-
+![cat](cat.png)
 **Absolute Path to Working Directory**: `/home/user`
 
 Explanation: Running `cat` with no arguments is an error because `cat` expects a file name as an argument. The output is an error indicating that no file name is provided.
@@ -97,7 +98,7 @@ Explanation: Running `cat` with no arguments is an error because `cat` expects a
 ```bash
 cat Desktop
 ```
-
+![cat desktop](cat7desktop.png)
 **Absolute Path to Working Directory**: `/Users/benjaminkettorjr`
 
 Explanation: Running `cat` with a directory name as an argument is an error because `cat` can only read files, not directories. The output is an error indicating that `Desktop` is a directory.
@@ -109,11 +110,8 @@ Explanation: Running `cat` with a directory name as an argument is an error beca
 ```bash
 cat transcript.txt
 ```
-
+![cat text](cat12txt.png)
 **Absolute Path to Working Directory**: `/Users/benjaminkettorjr`
 
 Explanation: Running `cat` with a file name as an argument reads the contents of the specified file (`transcript.txt`). The output displays the contents of the file.
 
-
-![Screenshot](Screenshot1.png)
-![Screenshot](Screenshot2.png)
