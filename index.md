@@ -1,117 +1,110 @@
-# Lab Report 1 - Remote Access and FileSystem (Week 1)
+# Lab Report 2 - Servers and SSH Keys (Week 3)
 
-In this lab report, I will demonstrate the usage of basic filesystem commands: `cd`, `ls`, and `cat`. Each command will be illustrated with three examples:
+## Part 1: ChatServer
 
-1. Using the command with no arguments.
-2. Using the command with a path to a directory as an argument.
-3. Using the command with a path to a file as an argument.
+### Code
 
-## `cd` Command
+```java
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.net.URI;
 
-### Example 1: No Arguments
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
 
-```bash
-cd
+interface URLHandler {
+    String handleRequest(URI url) throws Exception;
+}
+
+class ChatServerHandler implements HttpHandler {
+    private static String chatMessages = "";
+
+    public String handleRequest(URI url) throws Exception {
+        String query = url.getQuery();
+        String[] params = query.split("&");
+        String user = null;
+        String message = null;
+        for (String param : params) {
+            String[] keyValue = param.split("=");
+            if (keyValue.length == 2) {
+                if (keyValue[0].equals("s")) {
+                    message = keyValue[1];
+                } else if (keyValue[0].equals("user")) {
+                    user = keyValue[1];
+                }
+            }
+        }
+        if (user != null && message != null) {
+            chatMessages += user + ": " + message + "\n";
+            return chatMessages;
+        } else {
+            throw new IllegalArgumentException("Invalid request parameters");
+        }
+    }
+
+    @Override
+    public void handle(HttpExchange exchange) throws IOException {
+        try {
+            String ret = handleRequest(exchange.getRequestURI());
+            exchange.sendResponseHeaders(200, ret.getBytes().length);
+            OutputStream os = exchange.getResponseBody();
+            os.write(ret.getBytes());
+            os.close();
+        } catch(Exception e) {
+            String response = e.toString();
+            exchange.sendResponseHeaders(400, response.getBytes().length);
+            OutputStream os = exchange.getResponseBody();
+            os.write(response.getBytes());
+            os.close();
+        }
+    }
+}
+
+public class ChatServer {
+    public static void start(int port) throws IOException {
+        HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
+        server.createContext("/add-message", new ChatServerHandler());
+        server.start();
+        System.out.println("ChatServer started! Access it locally from a browser using http://localhost:" + port + "/add-message?s=YourMessage&user=YourUser");
+    }
+
+    public static void main(String[] args) throws IOException {
+        int port = 8000;
+        start(port);
+    }
+}
 ```
-![cd](cd.png)
+## Part 1: ScreenShots
 
-**Absolute Path to Working Directory**: `/Users/benjaminkettorjr`
+- **Screenshot 1:** Adding "Hello" from user "jpolitz"
+![jplotz](jplotz.png)
+- **Methods called**: `handleRequest`, `sendResponseHeaders`, `getResponseBody`, `close`
+- **Relevant arguments**: URI with query parameters `s=Hello&user=jpolitz`
+- **Changes in class fields**: The `chatMessages` field is updated to "jpolitz: Hello\n"
 
-Explanation: Running `cd` with no arguments changes the directory to the home directory (`/Users/benjaminkettorjr`), as it is the default behavior of the `cd` command when no arguments are provided. This output is not an error.
+- **Screenshot 2:** Adding "How are you" from user "yash"
+![yash](yash.png)
+- **Methods called**: `handleRequest`, `sendResponseHeaders`, `getResponseBody`, `close`
+- **Relevant arguments**: URI with query parameters `s=How are you&user=yash`
+- **Changes in class fields**: The `chatMessages` field is updated to "jpolitz: Hello\nyash: How are you\n”
 
----
+## Part 2: SSH Keys
+### Private Key Location (My Computer)
+- **ls ~/.ssh/id_rsa
+ ![Key](Key.png)
 
-### Example 2: Path to Directory
+### Public Key Location (ieng6 Machine)
+- ** ls ~/.ssh/authorized_keys
+  ![authorized](authorized.png)
 
-```bash
-cd Desktop
-```
-![cd](cd1desktop.png)
-**Absolute Path to Working Directory**: `/home/user/benjaminkettorj/Desktop`
+### Logging into ieng6 without Password
+- **ssh bkettor@ieng6
+  ![login](login.png)
 
-Explanation: Running `cd` with a directory name as an argument changes the directory to the specified directory (`Desktop` in this case). The output is not an error.
 
----
+## Part 3: Learning Reflection
 
-### Example 3: Path to File
-
-```bash
-cd /Users/benjaminkettorjr/Desktop/transcript.txt
-```
-![cd text](cd2text.png)
-**Absolute Path to Working Directory**: `cd /Users/benjaminkettorjr/Desktop/transcript.txt`
-
-Explanation: Running `cd` with a file name as an argument is an error because `cd` is used for changing directories, not files. The output is an error indicating that the specified file does not exist.
-
-## `ls` Command
-
-### Example 1: No Arguments
-
-```bash
-ls
-```
-![ls](ls.png)
-**Absolute Path to Working Directory**: `/Users/benjaminkettorjr`
-
-Explanation: Running `ls` with no arguments lists the contents of the current directory (`/Users/benjaminkettorjr`). This output is not an error.
-
----
-
-### Example 2: Path to Directory
-
-```bash
-ls Desktop
-```
-![ls desktop](ls18desktop.png)
-**Absolute Path to Working Directory**: `/Users/benjaminkettorjr`
-
-Explanation: Running `ls` with a directory name as an argument lists the contents of the specified directory (`/Users/benjaminkettorjr/Desktop` in this case). The output is not an error.
-
----
-
-### Example 3: Path to File
-
-```bash
-ls /Users/benjaminkettorjr/Desktop/transcript.txt
-```
-![ls text](ls0text.png)
-**Absolute Path to Working Directory**: `/Users/benjaminkettorjr`
-
-Explanation: Running `ls` with a file name as an argument lists information about the specified file (`transcript.txt`). The output is not an error.
-
-## `cat` Command
-
-### Example 1: No Arguments
-
-```bash
-cat
-```
-![cat](cat.png)
-**Absolute Path to Working Directory**: `/home/user`
-
-Explanation: Running `cat` with no arguments is an error because `cat` expects a file name as an argument. The output is an error indicating that no file name is provided.
-
----
-
-### Example 2: Path to Directory
-
-```bash
-cat Desktop
-```
-![cat desktop](cat7desktop.png)
-**Absolute Path to Working Directory**: `/Users/benjaminkettorjr`
-
-Explanation: Running `cat` with a directory name as an argument is an error because `cat` can only read files, not directories. The output is an error indicating that `Desktop` is a directory.
-
----
-
-### Example 3: Path to File
-
-```bash
-cat transcript.txt
-```
-![cat text](cat12txt.png)
-**Absolute Path to Working Directory**: `/Users/benjaminkettorjr`
-
-Explanation: Running `cat` with a file name as an argument reads the contents of the specified file (`transcript.txt`). The output displays the contents of the file.
+In the lab, I learned about the importance of HTTP request handling and response generation in building web servers using Java. Understanding these concepts provided insights into developing robust and efficient server-side applications.
 
