@@ -97,6 +97,6 @@ public class ChatServer {
 
 ### Public Key Location (ieng6 Machine)
 - ** ls ~/.ssh/authorized_keys
-  ![authorized keys](authorized keys.png)
+  ![authorized keys](authorizedkeys.png)
 
 
