@@ -91,6 +91,12 @@ public class ChatServer {
 - **Changes in class fields**: The `chatMessages` field is updated to "jpolitz: Hello\nyash: How are you\n”
 
 ## Part 2: SSH Keys
- ** Private Key Location (My Computer)
- ls ~/.ssh/id_rsa
+### Private Key Location (My Computer)
+- **ls ~/.ssh/id_rsa
  ![Key](Key.png)
+
+### Public Key Location (ieng6 Machine)
+- ** ls ~/.ssh/authorized_keys
+  ![authorized keys](authorized keys.png)
+
+
