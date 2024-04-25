@@ -104,3 +104,6 @@ public class ChatServer {
   ![login](login.png)
 
 
+## Part 3: Learning Reflection
+
+In the lab, I learned about the importance of HTTP request handling and response generation in building web servers using Java. Understanding these concepts provided insights into developing robust and efficient server-side applications.
