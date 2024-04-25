@@ -99,4 +99,8 @@ public class ChatServer {
 - ** ls ~/.ssh/authorized_keys
   ![authorized](authorized.png)
 
+### Logging into ieng6 without Password
+- **ssh bkettor@ieng6
+  ![login](login.png)
+
 
