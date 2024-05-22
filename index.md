@@ -1,86 +1,169 @@
-# Lab Report 4 - Vim (Week 7)
+### Lab Report 3 - Bugs and Commands (Week 5)
 
-## Step 4: Complete the first two lessons of vimtutor
+## Part 1 - Bugs
 
-### Screenshot:
-![Vimtutor](vimtutor_screenshot.png)
+### Bug Description
 
-### Keys Pressed:
-- `vimtutor<enter>`
+**Chosen Bug: Week 4 - ArrayIndexOutOfBoundsException**
 
-### Summary:
-Opened vimtutor to begin the tutorial.
+**Failure-Inducing Input:**
 
-## Step 5: Clone the repository
+```java
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
-### Screenshot:
-![Git Clone](git_clone_screenshot.png)
+public class BuggyProgramTest {
 
-### Keys Pressed:
-- `git clone https://github.com/ucsd-cse15l-s24/lab7<enter>`
+    @Test
+    public void testFailureInducingInput() {
+        int[] input = {1, 2, 3};
+        int index = 3; // Index out of bounds
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
+            int result = BuggyProgram.getElementAtIndex(input, index);
+        });
+    }
+}
+```
 
-### Summary:
-Cloned the lab7 repository from GitHub.
+**Non-Failure-Inducing Input**:
 
-## Step 6: Fix the program
+```java
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
-### Screenshot:
-![Vim Edit](vim_edit_screenshot.png)
+public class BuggyProgramTest {
 
-### Keys Pressed:
-- `cd lab7<enter>`
-- `vim ListExamples.java<enter>`
-- `/index1<enter>`
-- `cw`
-- `index2<esc>`
-- `:wq<enter>`
+    @Test
+    public void testNonFailureInducingInput() {
+        int[] input = {1, 2, 3};
+        int index = 2; // Valid index
+        assertDoesNotThrow(() -> {
+            int result = BuggyProgram.getElementAtIndex(input, index);
+        });
+    }
+}
+```
 
-### Summary:
-- Changed directory to lab7.
-- Opened ListExamples.java in vim.
-- Searched for "index1".
-- Changed "index1" to "index2".
-- Saved and exited vim.
+**Symptom:**
 
-## Step 7: Re-run the tests
 
-### Screenshot:
-![Run Tests](run_tests_screenshot.png)
+**Buggy Code (Before Fix):**
+```java
+public class BuggyProgram {
+    public static int getElementAtIndex(int[] array, int index) {
+        return array[index];
+    }
+}
+```
 
-### Keys Pressed:
-- `./run_tests.sh<enter>`
+**Fixed Code (After Fix):**
+```java
+public class BuggyProgram {
+    public static int getElementAtIndex(int[] array, int index) {
+        if (index < 0 || index >= array.length) {
+            throw new ArrayIndexOutOfBoundsException("Index " + index + " is out of bounds");
+        }
+        return array[index];
+    }
+}
+```
+##  Part 2 - Researching Commands
+**Command Chosen: grep**
 
-### Summary:
-Ran the shell script to execute the tests.
+## Option 1: -i (Ignore Case)
 
-## Step 8: Commit and push the change
+Description: The -i option makes grep case-insensitive, allowing it to match patterns regardless of case.
 
-### Screenshot:
-![Commit and Push](commit_push_screenshot.png)
+**Example 1:**
 
-### Keys Pressed:
-- `git add ListExamples.java<enter>`
-- `git commit -m "Fixed index1 to index2 in ListExamples.java"<enter>`
-- `git push<enter>`
+``` java
 
-### Summary:
-Staged the modified file for commit, committed the change with a message, and pushed the changes to the GitHub repository.
+grep -i "error" ./technical/logs.txt
 
-## Step 9: Adding the Lab Report to Your GitHub Pages Site
+```
 
-### Screenshot:
-![GitHub Pages](github_pages_screenshot.png)
+Output: This command searches for the term “error” in logs.txt, matching “Error”, “ERROR”, and other case variations.
 
-### Keys Pressed:
-- `cd path_to_your_github_pages_repository<enter>`
-- `cp path_to_lab_report/lab_report_4.md .<enter>`
-- `git add lab_report_4.md<enter>`
-- `git commit -m "Added Lab Report 4"<enter>`
-- `git push<enter>`
+**Example 2:**
 
-### Summary:
-- Navigated to the GitHub Pages repository.
-- Copied the lab report markdown file to the repository.
-- Staged the lab report file for commit.
-- Committed the change with a message.
-- Pushed the changes to the GitHub Pages repository.
+``` java
+grep -i "warning" ./technical/documents/report.txt
+
+```
+
+Output: This command searches for the term “warning” in report.txt, matching “Warning”, “WARNING”, and other case variations.
+
+Source: GNU grep Manual
+
+## Option 2: -r (Recursive)
+
+Description: The -r option allows grep to search recursively through directories.
+
+**Example 1:**
+
+``` java
+
+grep -r "TODO" ./technical/
+
+``` 
+Output: This command searches for the term “TODO” in all files within the technical directory and its subdirectories.
+
+**Example 2:**
+
+``` java
+
+grep -r "fixme" ./technical/code/
+```
+
+Output: This command searches for the term “fixme” in all files within the code directory and its subdirectories.
+
+Source: GNU grep Manual
+
+## Option 3: -v (Invert Match)
+
+Description: The -v option inverts the match, displaying lines that do not match the specified pattern.
+
+**Example 1:**
+
+``` java
+
+grep -v "DEBUG" ./technical/logs.txt
+
+``` 
+Output: This command shows all lines in logs.txt that do not contain the term “DEBUG”.
+
+**Example 2:**
+
+``` java
+grep -v "INFO" ./technical/logs.txt
+``` 
+
+Output: This command shows all lines in logs.txt that do not contain the term “INFO”.
+
+Source: GNU grep Manual
+
+## Option 4: -l (Files with Matches)
+
+Description: The -l option lists the names of files with matching lines, rather than displaying the matching lines themselves.
+
+**Example 1:**
+
+``` java
+
+grep -l "ERROR" ./technical/logs/*
+
+``` 
+
+Output: This command lists all files in the logs directory that contain the term “ERROR”.
+
+**Example 2:**
+
+``` java
+grep -l "import" ./technical/code/*
+``` 
+
+Output: This command lists all files in the code directory that contain the term “import”.
+
+Source: GNU grep Manual
+
+These examples demonstrate the versatility of the grep command in various scenarios, making it a powerful tool for searching through text in files and directories.
